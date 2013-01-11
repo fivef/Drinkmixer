@@ -1,7 +1,6 @@
 package sp.drinkmixer;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 import android.R.interpolator;
 import android.view.LayoutInflater;
@@ -13,8 +12,6 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 public class LeaderBoardEfficientListAdapter extends BaseAdapter {

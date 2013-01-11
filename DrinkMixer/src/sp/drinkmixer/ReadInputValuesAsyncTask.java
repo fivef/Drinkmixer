@@ -3,7 +3,6 @@ package sp.drinkmixer;
 import java.text.DecimalFormat;
 
 import li.rudin.ethernetcontrol.base.EthernetControlException;
-import li.rudin.ethernetcontrol.ethersex.ecmd.EthersexDigitalIO;
 import android.os.AsyncTask;
 
 public class ReadInputValuesAsyncTask extends AsyncTask<Void, Double, Double> {
@@ -32,19 +31,6 @@ public class ReadInputValuesAsyncTask extends AsyncTask<Void, Double, Double> {
 			try {
 
 				volts = drinkMixer.getAnalogIO().getVoltage(4);
-
-				// horizontal position sensors
-				leftSensorState = drinkMixer.getDigitalIO().getInput(
-						EthersexDigitalIO.PORTA,
-						drinkMixer.horizontalMotorLeftContactSensor);
-
-				if (leftSensorState == false) {
-
-					activity.drinkMixer
-							.closeValve(activity.drinkMixer.horizontalMotorOnOffPin);
-				}
-
-				// System.out.println("sensor: " + leftSensorState);
 
 			} catch (EthernetControlException e) {
 

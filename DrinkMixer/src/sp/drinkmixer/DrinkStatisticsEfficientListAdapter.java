@@ -1,25 +1,17 @@
 package sp.drinkmixer;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 public class DrinkStatisticsEfficientListAdapter extends BaseAdapter implements
 		Filterable {
 	private LayoutInflater mInflater;
-	private DrinkMixerActivity activity;
+	
 	private User selectedUser;
 
 	ViewHolder holder;
@@ -27,7 +19,7 @@ public class DrinkStatisticsEfficientListAdapter extends BaseAdapter implements
 	public DrinkStatisticsEfficientListAdapter(DrinkMixerActivity activity, User selectedUser) {
 		// Cache the LayoutInflate to avoid asking for a new one each time.
 		mInflater = LayoutInflater.from(activity);
-		this.activity = activity;
+		
 		this.selectedUser = selectedUser;
 
 	}

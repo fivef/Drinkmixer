@@ -1,9 +1,10 @@
 package sp.drinkmixer;
 
 
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,6 +23,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
 import com.crittercism.app.Crittercism;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;

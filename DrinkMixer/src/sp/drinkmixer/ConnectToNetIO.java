@@ -4,7 +4,6 @@ import java.util.List;
 
 import li.rudin.ethernetcontrol.base.EthernetControlException;
 import li.rudin.ethernetcontrol.ethersex.device.EthersexTCPDevice;
-import li.rudin.ethernetcontrol.ethersex.device.EthersexUDPDevice;
 import li.rudin.ethernetcontrol.ethersex.ecmd.EthersexAnalogIO;
 import li.rudin.ethernetcontrol.ethersex.ecmd.EthersexDigitalIO;
 import android.content.Context;

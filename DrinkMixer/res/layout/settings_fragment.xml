@@ -11,7 +11,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <LinearLayout
@@ -32,49 +32,27 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textAppearance="?android:attr/textAppearanceMedium" />
-                
+
                 <TextView
                     android:id="@+id/settingsFragmentTextViewPressure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" bar"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
 
-            </LinearLayout>
-            
-                 <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal" >
-
-                     <SeekBar
-                         android:id="@+id/settingsFragmentSeekBarPWM"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_weight="1"
-                         android:indeterminate="false"
-                         android:max="3900" />
-              
-            </LinearLayout>
-            
-                         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal" >
-              
-            </LinearLayout>
-            
-                                 <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal" >
-
-                                     <Switch
-                                         android:id="@+id/settingsFragmentMotorDirection"
-                                         android:layout_width="wrap_content"
-                                         android:layout_height="wrap_content"
-                                         android:text="Direction" />
-              
+
+                <SeekBar
+                    android:id="@+id/settingsFragmentSeekBarPWM"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:indeterminate="false"
+                    android:max="3900" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

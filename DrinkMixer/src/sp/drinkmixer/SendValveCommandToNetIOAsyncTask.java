@@ -19,9 +19,6 @@ public class SendValveCommandToNetIOAsyncTask extends
 	@Override
 	protected Boolean doInBackground(Integer... params) {
 
-		// successfull = 0 is successful, 4 tries
-		int successfull = 3;
-
 		try {
 
 			if (params[0] < 8) {

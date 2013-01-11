@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,9 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 public class DrinksFragment extends Fragment {
 	DrinkMixerActivity activity;
@@ -37,9 +34,6 @@ public class DrinksFragment extends Fragment {
 
 	boolean showOnlyPossibleDrinks = true;
 
-	// for saving list scroll position
-	private static final String LIST_STATE = "listState";
-	private Parcelable mListState = null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
