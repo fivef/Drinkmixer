@@ -1,18 +1,15 @@
 package sp.drinkmixer;
 
-import java.lang.Thread.UncaughtExceptionHandler;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 
+import java.util.List;
+import java.util.HashMap;
+import java.util.Locale;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
@@ -25,7 +22,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-
 import com.crittercism.app.Crittercism;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
@@ -636,7 +632,7 @@ public class DrinkMixerActivity extends Activity {
 
 		textToSpeech.setLanguage(Locale.GERMANY);
 
-		HashMap<String, String> myHashMap = new HashMap();
+		HashMap<String, String> myHashMap = new HashMap<String, String>();
 		myHashMap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "drink");
 
 		textToSpeech.speak(stringToSpeak, TextToSpeech.QUEUE_FLUSH, myHashMap);
