@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lineItem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:id="@+id/valveNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       
+ 
+        android:textSize="30sp"
+         />
+
+     <Spinner
+         android:id="@+id/spinner1"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_weight="1" />
+     
+      <ToggleButton
+          android:id="@+id/togglePort"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textOff="AUF"
+          android:textOn="ZU" />
+
+</LinearLayout>

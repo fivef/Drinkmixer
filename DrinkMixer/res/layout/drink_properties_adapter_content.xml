@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lineItem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    >
+
+    <Spinner
+        android:id="@+id/drinkPropertiesDrinkNameSpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"        
+        android:layout_marginLeft="10dip"
+        android:textSize="30sp"
+        android:layout_weight="1" />
+
+    <EditText
+        android:id="@+id/amountEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:minEms="3"
+        android:selectAllOnFocus="true"
+        android:singleLine="true" />
+    
+        <TextView
+        android:id="@+id/ml"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="ml"
+	 />
+    
+    
+   
+
+</LinearLayout>

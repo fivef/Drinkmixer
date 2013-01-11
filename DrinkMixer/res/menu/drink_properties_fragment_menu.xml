@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_drinkproperties_fragment_add_ingredient"
+          
+          android:title="Zutat hinzufügen"
+          android:showAsAction="always"
+          android:icon="@drawable/ic_menu_add" />
+    
+    
+     <item android:id="@+id/menu_drinkproperties_fragment_done"
+          
+          android:title="Fertig"
+          android:showAsAction="always"
+          android:icon="@drawable/ic_cab_done_holo_dark" />
+</menu>

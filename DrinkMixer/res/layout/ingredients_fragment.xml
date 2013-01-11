@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    
+     <Spinner
+        android:id="@+id/calibrationSpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:focusableInTouchMode="true" />
+    
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+           
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="25dp" >
+
+                <TextView
+                    android:id="@+id/ingredientName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name:" />
+
+                <EditText
+                    android:id="@+id/ingredientNameEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:capitalize="words"
+                    android:focusableInTouchMode="true"
+                    android:imeOptions="actionDone"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" >
+
+                    <requestFocus />
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="25dp" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ausflussmenge:" />
+
+                <EditText
+                    android:id="@+id/calibrationFlowrateEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ml/s" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="25dp" >
+
+                <TextView
+                    android:id="@+id/ingredientTotalAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gesamtmenge:" />
+
+                <EditText
+                    android:id="@+id/ingredientTotalAmountEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="ml" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="25dp" >
+
+                <TextView
+                    android:id="@+id/ingredientCurrentAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aktuelle Menge:" />
+
+                <EditText
+                    android:id="@+id/ingredientCurrentAmountEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="ml" />
+            </LinearLayout>
+            
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="25dp" >
+
+                <TextView
+                    android:id="@+id/ingredientPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Preis pro Liter:" />
+
+                <EditText
+                    android:id="@+id/ingredientPriceEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/ingredientPriceSuffix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="€/l" />
+
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="25dp" >
+
+
+                <TextView
+                    android:id="@+id/ingredientAlcoholConcentration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alkoholgehalt:" />
+
+                <EditText
+                    android:id="@+id/ingredientAlcoholConcentrationEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/ingredientAlcoholConcentrationSuffix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="%" />
+            </LinearLayout>
+            
+            
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="25dp" >
+
+
+                <TextView
+                    android:id="@+id/TotalIngredientUsageCountInMl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Insgesamt verwendet: " />
+                
+                 <TextView
+                    android:id="@+id/TotalIngredientUsageCountInMlValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    
+                    android:layout_weight="1" />
+
+         
+                
+                   <TextView
+                    android:id="@+id/TotalIngredientUsageCountInMlSuffix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ml" />
+
+
+            </LinearLayout>
+            
+                    <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="25dp" >
+
+
+                <TextView
+                    android:id="@+id/SessionIngredientUsageCountInMl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heute verwendet: " />
+                
+                 <TextView
+                    android:id="@+id/SessionIngredientUsageCountInMlValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   
+                    android:layout_weight="1" />
+
+         
+                
+                   <TextView
+                    android:id="@+id/SessionIngredientUsageCountInMlSuffix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ml" />
+
+
+            </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_marginTop="10dp" >
+
+                        <ToggleButton
+                            android:id="@+id/calibration_valve_toggleButton"
+                            android:layout_width="120dp"
+                            android:layout_height="76dp"
+                            android:textOff="Kalibrierung starten"
+                            android:textOn="Kalibrierung stoppen" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical" >
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.55" >
+
+                                    <TextView
+                                        android:id="@+id/textView3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="Menge:" />
+
+                                    <EditText
+                                        android:id="@+id/calibrationAmountEditText"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_weight="1"
+                                        android:ems="10"
+                                        android:imeOptions="actionDone"
+                                        android:inputType="number"
+                                        android:selectAllOnFocus="true"
+                                        android:singleLine="true"
+                                        android:text="100" />
+
+                                    <TextView
+                                        android:id="@+id/textView5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="ml" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.55" >
+
+                                    <TextView
+                                        android:id="@+id/textView4"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="Zeit:" />
+
+                                    <EditText
+                                        android:id="@+id/calibrationTimeEditText"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:ems="10"
+                                        android:imeOptions="actionDone"
+                                        android:inputType="numberDecimal"
+                                        android:selectAllOnFocus="true"
+                                        android:singleLine="true"
+                                        android:text="0" />
+
+                                    <TextView
+                                        android:id="@+id/textView6"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="s" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+            
+        </LinearLayout>
+
+    </ScrollView>
+     
+
+</LinearLayout>

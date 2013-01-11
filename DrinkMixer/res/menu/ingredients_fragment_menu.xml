@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+       <item android:id="@+id/menuIngredientFragmentNewIngredient"
+          
+          android:title="Neue Zutat"
+          android:showAsAction="always"
+           android:icon="@drawable/ic_menu_add" />
+       
+       
+       
+       
+       <item android:id="@+id/menuIngredientFragmentDeleteIngredient"
+          
+          android:title="Löschen"
+          android:showAsAction="always"
+          android:icon="@drawable/ic_menu_delete" />
+     
+     
+     
+      
+     
+</menu>

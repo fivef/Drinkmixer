@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/drinkTitleTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5sp"
+        android:capitalize="words"
+        android:hint="Name des Drinks"
+        android:imeOptions="actionDone"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="35sp" />
+
+    <ListView
+        android:id="@+id/DrinkPropertiesListView"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="25dp" >
+
+        <TextView
+            android:id="@+id/SessionDrinkUsageCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Heute gemixt: " />
+
+        <TextView
+            android:id="@+id/SessionDrinkUsageCountValue"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+    
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="25dp" >
+
+        <TextView
+            android:id="@+id/TotalDrinkUsageCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Insgesamt gemixt: " />
+
+        <TextView
+            android:id="@+id/TotalDrinkUsageCountValue"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>

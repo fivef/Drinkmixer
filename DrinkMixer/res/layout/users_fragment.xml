@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Spinner
+        android:id="@+id/usersSpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:focusableInTouchMode="true" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Gesamt Statistik:" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginLeft="10dp" >
+
+                    <TextView
+                        android:id="@+id/drinkCountDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Anzahl der Drinks: " />
+
+                    <TextView
+                        android:id="@+id/drinkCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/drinkCountSuffic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginLeft="10dp" >
+
+                    <TextView
+                        android:id="@+id/drinkCountDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Reiner Alkohol: " />
+
+                    <TextView
+                        android:id="@+id/pureAlcoholTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/drinkCountSuffic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" ml" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginLeft="10dp" >
+
+                    <TextView
+                        android:id="@+id/drinkCountDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="In Bier: " />
+
+                    <TextView
+                        android:id="@+id/beerEquivalentTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/drinkCountSuffic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Bier" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginLeft="10dp" >
+
+                    <TextView
+                        android:id="@+id/drinkCountDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Promille: " />
+
+                    <TextView
+                        android:id="@+id/promilleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/drinkCountSuffic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Promille" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginLeft="10dp" >
+
+                    <TextView
+                        android:id="@+id/drinkCountDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kosten: " />
+
+                    <TextView
+                        android:id="@+id/costTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/drinkCountSuffic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" €" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="25dp"
+                android:text="Drinks Statistik:" />
+
+            <ListView
+                android:id="@+id/drinksstatus"
+                android:layout_width="match_parent"
+                android:layout_height="170dip"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="5.0" >
+            </ListView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="25dp" >
+
+                <TextView
+                    android:id="@+id/userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name:" />
+
+                <EditText
+                    android:id="@+id/userNameEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:capitalize="words"
+                    android:focusableInTouchMode="true"
+                    android:imeOptions="actionDone"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="25dp" >
+
+                <TextView
+                    android:id="@+id/userWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gewicht:" />
+
+                <EditText
+                    android:id="@+id/userWeightEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:capitalize="words"
+                    android:focusableInTouchMode="true"
+                    android:imeOptions="actionDone"
+                    android:inputType="number|numberPassword"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" >
+
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="25dp" >
+
+                <TextView
+                    android:id="@+id/userAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alter:" />
+
+                <EditText
+                    android:id="@+id/userAgeEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:capitalize="words"
+                    android:focusableInTouchMode="true"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="25dp" >
+
+                <TextView
+                    android:id="@+id/userSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Größe in cm:" />
+
+                <EditText
+                    android:id="@+id/userSizeEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:capitalize="words"
+                    android:focusableInTouchMode="true"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="25dp" >
+
+                <RadioGroup
+                    android:id="@+id/sexRadioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <RadioButton
+                        android:id="@+id/radioButtonMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Männlich" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonFemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weiblich" />
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

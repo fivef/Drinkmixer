@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, DrinkMixerActivity!</string>
+    <string name="app_name">Drink Mixer</string>
+
+    <string-array name="Criteria">
+        <item>Alkohol in ml</item>
+        <item>Promille</item>
+        <item>Anzahl der Drinks</item>
+        <item>Gesamt Kosten in €</item>
+        <item>Alphabetisch</item>
+    </string-array>
+
+</resources>

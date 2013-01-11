@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/drinkFragmentActionModeNewDrink"
+        android:title="Drink Hinzufügen"
+        android:icon="@drawable/ic_menu_add"/>
+    <item
+        android:id="@+id/drinkFragmentActionModeEdit"
+        android:icon="@drawable/ic_menu_edit"
+        android:title="Bearbeiten"/>
+    <item
+        android:id="@+id/drinkFragmentActionModeDelete"
+        android:icon="@drawable/ic_menu_delete"
+        android:title="Löschen"/>
+    
+     <item
+        android:id="@+id/drinkFragmentActionModeDuplicate"
+        android:icon="@drawable/ic_menu_duplicate"
+        android:title="Duplizieren"/>
+
+</menu>

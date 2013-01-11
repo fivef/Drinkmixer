@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    
+   
+
+    
+    
+      <item android:id="@+id/menu_drink_fragment_open_configuration_fragment"
+          
+          android:title="Belegung"
+          android:showAsAction="never" />
+      
+      
+      <item android:id="@+id/menu_drink_fragment_open_ingredients_fragment"
+          
+          android:title="Zutaten"
+          android:showAsAction="never" />
+      
+         <item android:id="@+id/menu_drink_fragment_open_users_fragment"
+          
+          android:title="Benutzer"
+          android:showAsAction="never" />
+       
+      <item android:id="@+id/menu_drink_fragment_open_settings_fragment"
+          
+          android:title="Einstellungen"
+          android:showAsAction="never" />
+      
+           <item android:id="@+id/menu_drink_fragment_NewSession"
+          
+          android:title="Neue Session"
+          android:showAsAction="never" />
+
+      
+</menu>

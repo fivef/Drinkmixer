@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--AgileJ Ltd. (http://www.agilej.com)--><ajsv>
+    <diagram creationDate="2012-Dez-16 01:19" filterScript="" licenseGrade="evaluation" licenseeName="anon" licenseeOrganization="unknown" version="1.7.13.v20121104-1605">
+        <class className="sp.drinkmixer.Drink" project="DrinkMixer" xLocation="308" yLocation="-216"/>
+        <class className="sp.drinkmixer.DrinkLogEntry" project="DrinkMixer" xLocation="2888" yLocation="-478"/>
+        <class className="sp.drinkmixer.DrinkMixer" project="DrinkMixer" xLocation="1465" yLocation="-77"/>
+        <class className="sp.drinkmixer.Ingredient" project="DrinkMixer" xLocation="825" yLocation="880"/>
+        <class className="sp.drinkmixer.IngredientInDrink" project="DrinkMixer" xLocation="238" yLocation="1764"/>
+        <class className="sp.drinkmixer.User" project="DrinkMixer" xLocation="2771" yLocation="240"/>
+        <class className="sp.drinkmixer.DataModel" project="DrinkMixer" xLocation="1696" yLocation="-576"/>
+    </diagram>
+</ajsv>
