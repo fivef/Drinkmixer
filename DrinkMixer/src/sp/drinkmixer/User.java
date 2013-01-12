@@ -381,6 +381,41 @@ public class User {
 	}
 	
 	
+	public int getAllTimeDrinkCount() {
+		return allTimeDrinkCount;
+	}
+
+
+
+
+	public double getAllTimePureAlcohol() {
+		return allTimePureAlcohol;
+	}
+
+
+
+
+	public double getAllTimebeerEquivalent() {
+		return allTimebeerEquivalent;
+	}
+
+
+
+
+	public double getAllTimepromille() {
+		return allTimepromille;
+	}
+
+
+
+
+	public double getAllTimeCosts() {
+		return allTimeCosts;
+	}
+
+
+
+
 	public User makeSnapshot() {
 
 		User user = new User();
