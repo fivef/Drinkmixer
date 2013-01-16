@@ -236,7 +236,8 @@ public class User {
 	
 	private double calcPromille() {
 		
-		//Calc GKW (Total amount of water in body in l)
+		//Calc GKW (Total amount of water in body in l) see. Watson-Formula Wikipedia
+		//http://de.wikipedia.org/wiki/Blutalkoholkonzentration#Berechnung_der_BAK
 		double GKW = 0;
 		
 		if(isMale()){
