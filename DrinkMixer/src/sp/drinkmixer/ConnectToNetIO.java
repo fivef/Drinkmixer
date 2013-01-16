@@ -166,9 +166,7 @@ public class ConnectToNetIO extends AsyncTask<String, Void, Boolean> {
 			drinkMixer.setConnectedToNETIO(true);
 
 			// start input value thread
-			
-			//Input value thread disabled.
-			//drinkMixer.startReadInputValuesThread();
+			drinkMixer.startReadInputValuesThread();
 		} else {
 			drinkMixer.setConnectedToNETIO(false);
 
