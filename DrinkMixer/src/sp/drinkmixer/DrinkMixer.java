@@ -29,14 +29,6 @@ public class DrinkMixer {
 
 	private EthersexAnalogIO analogIO;
 
-	public EthersexAnalogIO getAnalogIO() {
-		return analogIO;
-	}
-
-	public void setAnalogIO(EthersexAnalogIO analogIO) {
-		this.analogIO = analogIO;
-	}
-
 	private boolean connectedToNETIO = false;
 
 	private DrinkMixerActivity activity;
@@ -45,22 +37,24 @@ public class DrinkMixer {
 
 	AsyncTask<Void, Double, Double> inputSensorThread;
 
-	public AsyncTask<Void, Double, Double> getPressureSensorThread() {
-		return inputSensorThread;
-	}
-
-	public void setPressureSensorThread(
-			AsyncTask<Void, Double, Double> pressureSensorThread) {
-		this.inputSensorThread = pressureSensorThread;
-	}
-
 	public Ingredient lastAddedIngredient;
 
 	private boolean isCleaning;
+	
+	
+	//pressure sensing:
+	
+	//indicates if pressure control is enabled
+	private boolean pressureControlEnabled;
+	
+	//indicates the desired pressure in the system
+	private double pressureSetPoint = 0.2;
 
 	public String wlanSSID = "WLAN";
 	
 	
+	
+
 	//acutator and sensor names
 	
 	public static final int horizontalMotorOnOffPin = 15;
@@ -501,6 +495,41 @@ public class DrinkMixer {
 		
 		return data.users;
 		
+	}
+
+	public void setPressureControlEnabled(boolean enabled) {
+		this.pressureControlEnabled = enabled;
+		
+	}
+
+	public boolean isPressureControlEnabled() {
+		
+		return this.pressureControlEnabled;
+	}
+
+	public double getPressureSetPoint() {
+		return pressureSetPoint;
+	}
+
+	public void setPressureSetPoint(double pressureSetPoint) {
+		this.pressureSetPoint = pressureSetPoint;
+	}
+
+	public EthersexAnalogIO getAnalogIO() {
+		return analogIO;
+	}
+
+	public void setAnalogIO(EthersexAnalogIO analogIO) {
+		this.analogIO = analogIO;
+	}
+
+	public AsyncTask<Void, Double, Double> getPressureSensorThread() {
+		return inputSensorThread;
+	}
+
+	public void setPressureSensorThread(
+			AsyncTask<Void, Double, Double> pressureSensorThread) {
+		this.inputSensorThread = pressureSensorThread;
 	}
 
 }

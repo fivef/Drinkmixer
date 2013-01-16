@@ -69,13 +69,8 @@ public class SettingsFragment extends Fragment {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		
-					if(isChecked){
-						activity.drinkMixer.openValve(12);
-
-					}else{
-						activity.drinkMixer.closeValve(12);
-
-					}
+					
+					activity.drinkMixer.setPressureControlEnabled(isChecked);
 
 			}
 		});
