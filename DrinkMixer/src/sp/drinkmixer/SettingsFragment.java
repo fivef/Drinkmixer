@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class SettingsFragment extends Fragment {
@@ -15,6 +18,8 @@ public class SettingsFragment extends Fragment {
 	TextView pressureValueTextView;
 	
 	SeekBar positionSeekBar;
+	
+	Switch compressorOnOffSwitch;
 
 	public SettingsFragment() {
 
@@ -53,6 +58,25 @@ public class SettingsFragment extends Fragment {
 
 				activity.drinkMixer.sendECMDCommand("hbridge setpoint " + progress);
 				
+			}
+		});
+		
+		
+		compressorOnOffSwitch = (Switch) view.findViewById(R.id.settingsFragmentCompressor);
+		
+		compressorOnOffSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		
+					if(isChecked){
+						activity.drinkMixer.openValve(12);
+
+					}else{
+						activity.drinkMixer.closeValve(12);
+
+					}
+
 			}
 		});
 
