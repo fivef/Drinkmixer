@@ -72,6 +72,8 @@ public class DrinkMixerActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.main);
+		
+		
 
 		Crittercism.init(getApplicationContext(), "503f8db62cd95220ce000006");
 		
@@ -82,6 +84,8 @@ public class DrinkMixerActivity extends Activity {
 		restoreDataModel();
 
 		openLeaderboardFragment();
+		
+		drinkMixer.connectToNetIO();
 
 		/*
 		 * This catches all unhandled Exceptions and logs the error with a user
@@ -119,7 +123,7 @@ public class DrinkMixerActivity extends Activity {
 		// to refresh the isconnected status icon
 		invalidateOptionsMenu();
 
-		drinkMixer.connectToNetIO();
+		
 
 		super.onStart();
 	}
@@ -128,7 +132,7 @@ public class DrinkMixerActivity extends Activity {
 	protected void onStop() {
 
 		saveStateToDB();
-		drinkMixer.disconnectFromNetIO();
+		
 
 		super.onStop();
 	}
@@ -137,13 +141,18 @@ public class DrinkMixerActivity extends Activity {
 	public void onDestroy() {
 		super.onDestroy();
 
+	
+
+		textToSpeech.shutdown();
+		
+		saveStateToDB();
+		drinkMixer.disconnectFromNetIO();
+		
 		if (db != null) {
 			db.close();
 
 			System.out.println("DB closed");
 		}
-
-		textToSpeech.shutdown();
 
 	}
 
@@ -603,15 +612,8 @@ public class DrinkMixerActivity extends Activity {
 
 		case R.id.DrinkMixerActivityMenuClean:
 
-			Drink cleanDrink = new Drink("reinigen");
-
-			/*
-			 * for(Ingredient ingredient: drinkMixer.getConfiguration()){
-			 * 
-			 * cleanDrink.addIngredient(ingredient, 20); }
-			 */
-
-			openMixingDrinkFragment(cleanDrink);
+			
+			//TODO: cleaning mode
 
 			break;
 

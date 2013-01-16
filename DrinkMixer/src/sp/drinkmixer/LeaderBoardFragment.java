@@ -112,6 +112,21 @@ public class LeaderBoardFragment extends Fragment {
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
+	
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		
+		//set the color of the connection indicator
+		MenuItem item = menu.findItem(R.id.DrinkMixerActivityMenuconnected);
+		
+		if (activity.drinkMixer.isConnectedToNETIO()) {
+			item.setIcon(R.drawable.ic_notification_green);
+		} else {
+			item.setIcon(R.drawable.ic_notification_red);
+		}
+		
+		super.onPrepareOptionsMenu(menu);
+	}
 
 
 	@Override
@@ -148,6 +163,24 @@ public class LeaderBoardFragment extends Fragment {
 			activity.showNewSessionDecitionDialog();
 
 			break;	
+			
+		case R.id.DrinkMixerActivityMenuconnected:
+
+			if (activity.drinkMixer.isConnectedToNETIO()) {
+
+			} else {
+
+				activity.drinkMixer.connectToNetIO();
+
+			}
+
+			break;
+			
+		case R.id.menu_drink_fragment_CloseApp:
+			
+			activity.finish();
+			
+			break;
 			
 
 

@@ -3,7 +3,11 @@
     
    
 
-    
+      <item android:id="@+id/DrinkMixerActivityMenuconnected"
+          
+          android:title="Reconnect"
+          android:showAsAction="always"
+          android:icon="@drawable/ic_notification_red" />
     
       <item android:id="@+id/menu_drink_fragment_open_configuration_fragment"
           
@@ -26,9 +30,14 @@
           android:title="Einstellungen"
           android:showAsAction="never" />
       
-           <item android:id="@+id/menu_drink_fragment_NewSession"
+       <item android:id="@+id/menu_drink_fragment_NewSession"
           
           android:title="Neue Session"
+          android:showAsAction="never" />
+       
+         <item android:id="@+id/menu_drink_fragment_CloseApp"
+          
+          android:title="Beenden"
           android:showAsAction="never" />
 
       

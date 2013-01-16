@@ -150,6 +150,7 @@ public class DrinksFragment extends Fragment {
 		menu.findItem(R.id.menu_drink_fragment_showPossible).setVisible(
 				!showOnlyPossibleDrinks);
 
+		//set the color of the connection indicator
 		MenuItem item = menu.findItem(R.id.DrinkMixerActivityMenuconnected);
 
 		if (activity.drinkMixer.isConnectedToNETIO()) {

@@ -175,6 +175,7 @@ public class MixDrinkAsyncTask extends
 
 			activity.mixingDrinkFragment.setDone();
 
+			//TODO: do this only if activity is open or reopen activity automatically
 			activity.openLeaderboardFragment();
 
 		} else { // there are more running tasks:
