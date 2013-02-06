@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 import li.rudin.ethernetcontrol.base.EthernetControlException;
 import android.os.AsyncTask;
 
-public class PressureSensorAsyncTask extends AsyncTask<Void, Double, Double> {
+public class PressureControlAsyncTask extends AsyncTask<Void, Double, Double> {
 
 	DrinkMixerActivity activity;
 	DrinkMixer drinkMixer;
@@ -15,7 +15,7 @@ public class PressureSensorAsyncTask extends AsyncTask<Void, Double, Double> {
 	double volts;
 
 
-	public PressureSensorAsyncTask(DrinkMixerActivity activity) {
+	public PressureControlAsyncTask(DrinkMixerActivity activity) {
 
 		this.drinkMixer = activity.drinkMixer;
 		this.activity = activity;

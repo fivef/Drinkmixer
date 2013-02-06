@@ -75,10 +75,13 @@ public class MixDrinkAsyncTask extends
 
 		ingredientLinearLayout.addView(progressBar);
 
-		LinearLayout parentLayout = (LinearLayout) activity.mixingDrinkFragment.view
-				.findViewById(R.id.mixingDrinkLayout);
+		if(activity.mixingDrinkFragment != null){
+			LinearLayout parentLayout = (LinearLayout) activity.mixingDrinkFragment.view
+					.findViewById(R.id.mixingDrinkLayout);
 
-		parentLayout.addView(ingredientLinearLayout);
+			parentLayout.addView(ingredientLinearLayout);
+		
+		}
 
 		super.onPreExecute();
 	}
@@ -93,13 +96,8 @@ public class MixDrinkAsyncTask extends
 		double totalWaitTimeInMilliseconds = (myingredientToPutInDrink.amount / myingredientToPutInDrink.ingredient
 				.getFlowRate()) * 1000;
 
-		/*
-		 * hier zeit in 100 teile einteilen
-		 * 
-		 * glasgr��e beachten
-		 */
 
-		if (myingredientToPutInDrink.amount != 0) {
+		if (myingredientToPutInDrink.amount > 0) {
 			waitTimeFor1MlInMilliseconds = (long) totalWaitTimeInMilliseconds
 					/ myingredientToPutInDrink.amount;
 		} else {
@@ -173,10 +171,15 @@ public class MixDrinkAsyncTask extends
 				drinkMixer.getCurrentUser().drink(currentDrink);
 			}
 
-			activity.mixingDrinkFragment.setDone();
+			if(activity.mixingDrinkFragment != null){
+				
+				activity.mixingDrinkFragment.setDone();
+				
+				//TODO: do this only if activity is open or reopen activity automatically
+				activity.openLeaderboardFragment();
+			}
 
-			//TODO: do this only if activity is open or reopen activity automatically
-			activity.openLeaderboardFragment();
+			
 
 		} else { // there are more running tasks:
 

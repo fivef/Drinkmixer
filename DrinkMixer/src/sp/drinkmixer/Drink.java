@@ -135,10 +135,6 @@ public class Drink {
 							+ ingredientInDrink.ingredient.getName()
 							+ " is empty");
 
-					/*
-					 * activity.showErrorDialog("Zutat " +
-					 * ingredientInDrink.ingredient.getName() + " ist leer");
-					 */
 					activity.showIngredientEmptyRefillDecitionDialog(ingredientInDrink.ingredient);
 
 					activity.openDrinksFragment();
@@ -166,6 +162,8 @@ public class Drink {
 
 		// Open valve of each ingredient in drink for length calculated by
 		// amount and flowrate
+		
+		System.out.println("Mixing " + getName());
 
 		for (IngredientInDrink ingredientInDrink : this.ingredients) {
 

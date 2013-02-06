@@ -17,16 +17,12 @@ public class DrinkMixer {
 	 * AVR Net IO
 	 */
 	private EthersexTCPDevice dev;
-	
-	//the ssid of the drinkmixers wlan router
+
+	// the ssid of the drinkmixers wlan router
 	public static final String WLAN_SSID = "WLAN";
-	
-	//the avr net io's ip address
+
+	// the avr net io's ip address
 	public static final String AVR_NET_IO_IP_ADDRESS = "192.168.178.90";
-
-	int oldNetworkId;
-
-	AsyncTask<String, Void, Boolean> connectTask;
 
 	/*
 	 * digital IO ports of AVR Net IO
@@ -37,67 +33,72 @@ public class DrinkMixer {
 
 	private boolean connectedToNETIO = false;
 
+	// saves network id to reconnect to the wlan the device was connected before
+	int oldNetworkId;
+
 	private DrinkMixerActivity activity;
 
-	private ArrayList<MixDrinkAsyncTask> runningIngredientTasks = new ArrayList<MixDrinkAsyncTask>();
+	// List of currently running mixing tasks
+	private ArrayList<MixDrinkAsyncTask> activeMixingTasks = new ArrayList<MixDrinkAsyncTask>();
 
+	// indicates if cleaning mode is enabled
+	private boolean isCleaning;
+
+	/*
+	 * pressure control:
+	 */
 	AsyncTask<Void, Double, Double> pressureSensor;
 
-	public Ingredient lastAddedIngredient;
-
-	//indicates if cleaning mode is enabled
-	private boolean isCleaning;
-	
-	/*
-	 * pressure sensing:
-	 */
-		
-	//indicates if pressure control is enabled
+	// indicates if pressure control is enabled
 	private boolean pressureControlEnabled;
-	
-	//indicates the desired pressure in the system in bar
+
+	// indicates the desired pressure in the system in bar
 	private double pressureSetPoint = 0.2;
-	
-	//sample period in ms
+
+	// sample period in ms
 	public static final int PRESSURE_SENSOR_SAMPLING_PRERIOD = 1000;
-	
-	//which shift regeister pin is the compressor connected to
+
+	// which shift regeister pin is the compressor connected to
 	public static final int COMPRESSOR_PIN = 12;
-	
-	//switching hysteresis
+
+	// switching hysteresis
 	public static final double PRESSURE_SENSOR_HYSTERESIS = 0.01;
-	
-	//voltage offset to get a 0 from sensor on ambient pressure
+
+	// voltage offset to get a 0 from sensor on ambient pressure
 	public static final double PRESSURE_SENSOR_OFFSET = 0.17;
-	
-	
+
 	/*
 	 * motor control
 	 */
-	
-	//encoder pulses per cm. Needed for centimeters to encoder pulses conversion.
+
+	// encoder pulses per cm. Needed for centimeters to encoder pulses
+	// conversion.
 	public static final int MOTOR_CONTROL_ENCODER_PULSES_PER_CM = 120;
-	
-	//used for positioning by seek bar
+
+	// used for positioning by seek bar
 	public static final int WORKING_SPACE_WIDTH_IN_ENCODER_PULSES = 3900;
 
-	
 	/*
 	 * The drink which was last selected in drinksFragment.
 	 */
-
 	Drink selectedDrink;
-	
-	
+
 	/*
 	 * the currently active user
 	 */
 	private User currentUser;
 
+	private AsyncTask<String, Void, Boolean> connectTask;
 	private AsyncTask<Void, Double, Double> fillShotsThread;
 
 	public User getCurrentUser() {
-		return currentUser;
+
+		if (currentUser != null) {
+
+			return currentUser;
+		} else {
+			return getUsers().get(0);
+		}
 	}
 
 	public void setCurrentUser(User currentUser) {
@@ -124,13 +125,13 @@ public class DrinkMixer {
 
 		for (Drink drink : data.drinks) {
 
-			if (drink.getName() == name) {
+			if (drink.getName().compareToIgnoreCase(name) == 0) {
 				return drink;
 			}
 
 		}
 
-		System.out.println("Drink with name " + name + "not found");
+		System.out.println("Drink with name " + name + " not found");
 
 		return null;
 
@@ -202,46 +203,41 @@ public class DrinkMixer {
 		closeValve(data.configuration.indexOf(ingredient));
 
 	}
-	
-	public void sendECMDCommand(String command){
-		
+
+	public void sendECMDCommand(String command) {
+
 		if (isConnectedToNETIO()) {
 			// Set pin PortNumber on port c to true
 			new SendECMDCommandToNetIOAsyncTask(activity).execute(command);
 
-			
 		} else {
-			System.out.println("Open Valve: Not connected to NET IO");
+			System.out.println("Could not execute " + command + ". Reason: Not connected to NET IO");
 		}
-		
+
 	}
 
 	public void openValve(int portNumber) {
 
-		
-
 		if (isConnectedToNETIO()) {
 			// Set pin PortNumber on port c to true
-			new SendValveCommandToNetIOAsyncTask(activity).execute(portNumber, 1);
+			new SendValveCommandToNetIOAsyncTask(activity).execute(portNumber,
+					1);
 
-			
 		} else {
-			System.out.println("Open Valve: Not connected to NET IO");
+			System.out.println("Open Valve " + portNumber + ": Not connected to NET IO");
 		}
 
 	}
 
 	public void closeValve(int portNumber) {
 
-		
-
 		if (isConnectedToNETIO()) {
 			// Set pin PortNumber on port c to false
-			new SendValveCommandToNetIOAsyncTask(activity).execute(portNumber, 0);
+			new SendValveCommandToNetIOAsyncTask(activity).execute(portNumber,
+					0);
 
-			
 		} else {
-			System.out.println("Close Valve: Not connected to NET IO");
+			System.out.println("Close Valve " + portNumber + ": Not connected to NET IO");
 		}
 
 	}
@@ -253,7 +249,8 @@ public class DrinkMixer {
 		}
 
 		// default port of ethernetcontrol library and ethersex is 2701
-		connectTask = new ConnectToNetIO(activity).execute(DrinkMixer.AVR_NET_IO_IP_ADDRESS);
+		connectTask = new ConnectToNetIO(activity)
+				.execute(DrinkMixer.AVR_NET_IO_IP_ADDRESS);
 
 	}
 
@@ -275,8 +272,6 @@ public class DrinkMixer {
 		}
 
 		stopAllRunningTasks();
-		
-		
 
 		setConnectedToNETIO(false);
 
@@ -299,12 +294,12 @@ public class DrinkMixer {
 	}
 
 	public boolean getValveState(int number) {
-		
+
 		boolean state;
-		
-		try{
+
+		try {
 			state = data.valveStates.get(number);
-		}catch(IndexOutOfBoundsException e){
+		} catch (IndexOutOfBoundsException e) {
 			state = false;
 		}
 		return state;
@@ -382,7 +377,7 @@ public class DrinkMixer {
 	}
 
 	public ArrayList<MixDrinkAsyncTask> getRunningTasks() {
-		return runningIngredientTasks;
+		return activeMixingTasks;
 	}
 
 	public boolean isCleaning() {
@@ -422,7 +417,7 @@ public class DrinkMixer {
 
 		// stop all tasks (handled in oncanceled eventhandler in
 		// MixDrinkAsyncTask)
-		for (MixDrinkAsyncTask task : runningIngredientTasks) {
+		for (MixDrinkAsyncTask task : activeMixingTasks) {
 
 			task.cancel(true);
 
@@ -439,11 +434,10 @@ public class DrinkMixer {
 			IngredientInDrink ingredientInDrink = new IngredientInDrink(
 					ingredient, 20);
 
-			runningIngredientTasks
-					.add((MixDrinkAsyncTask) new MixDrinkAsyncTask(activity,
-							new Drink("clean"), ingredientInDrink)
-							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-									ingredientInDrink));
+			activeMixingTasks.add((MixDrinkAsyncTask) new MixDrinkAsyncTask(
+					activity, new Drink("clean"), ingredientInDrink)
+					.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
+							ingredientInDrink));
 
 		}
 
@@ -477,9 +471,8 @@ public class DrinkMixer {
 
 	public void startPressureSensorAsyncTask() {
 
-		pressureSensor = new PressureSensorAsyncTask(activity)
-		.executeOnExecutor(
-				AsyncTask.THREAD_POOL_EXECUTOR);
+		pressureSensor = new PressureControlAsyncTask(activity)
+				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 	}
 
@@ -491,28 +484,24 @@ public class DrinkMixer {
 	}
 
 	public void startFillShotsThread() {
-		
-		//Cancel thread if alread running
+
+		// Cancel thread if alread running
 		if (fillShotsThread != null) {
 			fillShotsThread.cancel(true);
 		}
 
 		fillShotsThread = new MotorControlAsyncTask(activity)
-		.executeOnExecutor(
-				AsyncTask.THREAD_POOL_EXECUTOR);
+				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 	}
-	
-	/* no needed?
-	public void stopFillShotsThread() {
-		if (fillShotsThread != null) {
-			fillShotsThread.cancel(true);
-		}
-		
-	}
-	*/
-	
-	
+
+	/*
+	 * not needed? public void stopFillShotsThread() { if (fillShotsThread !=
+	 * null) { fillShotsThread.cancel(true); }
+	 * 
+	 * }
+	 */
+
 	public void duplicateDrink(Drink selectedDrink) {
 
 		try {
@@ -525,35 +514,36 @@ public class DrinkMixer {
 		}
 
 	}
-	
-	public User newUser(){
-		
-		User newUser = new User(); 
+
+	public User newUser() {
+
+		User newUser = new User();
 		data.users.add(newUser);
 		return newUser;
 	}
-	
-	public void deleteUser(User number){
+
+	public void deleteUser(User number) {
 		data.users.remove(number);
-		
+
 	}
-	public void selectUser(int number){
+
+	public void selectUser(int number) {
 		currentUser = data.users.get(number);
 	}
-	
-	public ArrayList<User> getUsers(){
-		
+
+	public ArrayList<User> getUsers() {
+
 		return data.users;
-		
+
 	}
 
 	public void setPressureControlEnabled(boolean enabled) {
 		this.pressureControlEnabled = enabled;
-		
+
 	}
 
 	public boolean isPressureControlEnabled() {
-		
+
 		return this.pressureControlEnabled;
 	}
 
@@ -572,7 +562,5 @@ public class DrinkMixer {
 	public void setAnalogIO(EthersexAnalogIO analogIO) {
 		this.analogIO = analogIO;
 	}
-
-
 
 }

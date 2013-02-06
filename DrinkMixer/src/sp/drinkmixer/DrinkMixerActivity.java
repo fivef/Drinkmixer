@@ -146,12 +146,15 @@ public class DrinkMixerActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
+				
+				//TODO: check if this can be deleted
 				openDrinksFragment();
 			}
 		});
 
 		ad.show();
 	}
+
 
 	public void showCatchAllErrorDialog(String error) {
 

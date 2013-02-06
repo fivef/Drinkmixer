@@ -13,10 +13,10 @@ public class MotorControlAsyncTask extends AsyncTask<Void, Double, Double> {
 	
 	private int currentSetPoint = 0;
 
-	//Distance betwenn the center of the shot glasses in mm
+	//Distance between the center of the shot glasses in mm
 	public final static int DISTANCE_BETWEEN_SHOT_GLASSES = 43;
 	
-	//Distance betwenn the center of the first shot glass and init position in mm
+	//Distance between the center of the first shot glass and init position in mm
 	public final static int DISTANCE_BETWEEN_FIRST_GLASS_AND_INIT_POSITION = 27;
 
 	public MotorControlAsyncTask(DrinkMixerActivity activity) {
@@ -26,6 +26,60 @@ public class MotorControlAsyncTask extends AsyncTask<Void, Double, Double> {
 
 	}
 	
+	@Override
+	protected Double doInBackground(Void... params) {
+	
+		
+	
+		try {
+			
+			moveRight(DISTANCE_BETWEEN_FIRST_GLASS_AND_INIT_POSITION);
+			
+			//Fill first
+			Thread.sleep(5000);
+			
+			
+			Drink drink = drinkMixer.getDrinkByName("Wasser Shot");
+			//Drink drink = drinkMixer.g
+			if(drink != null){
+				drink.mix(activity);
+			}
+			
+			Thread.sleep(7000);
+			
+			moveLeft(DISTANCE_BETWEEN_SHOT_GLASSES);
+			
+			//Fill second
+			Thread.sleep(10000);
+			
+			if(drink != null){
+				drink.mix(activity);
+			}
+			
+			Thread.sleep(7000);
+			
+			moveToInitPosition();
+			
+	
+			
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+		}
+		
+		
+	
+		if (isCancelled()) {
+	
+			return 0.0;
+		}
+	
+		//publishProgress(value);
+	
+		return 0.0;
+	
+	}
+
 	/*
 	 * move distance mm to right
 	 */
@@ -60,45 +114,6 @@ public class MotorControlAsyncTask extends AsyncTask<Void, Double, Double> {
 		int stepsInt = (int) steps;
 		
 		return stepsInt;
-	}
-
-	@Override
-	protected Double doInBackground(Void... params) {
-
-		
-
-		try {
-			
-			moveRight(DISTANCE_BETWEEN_FIRST_GLASS_AND_INIT_POSITION);
-			
-			//Fill first
-			Thread.sleep(10000);
-			
-			moveLeft(DISTANCE_BETWEEN_SHOT_GLASSES);
-			
-			//Fill second
-			Thread.sleep(10000);
-			
-			moveToInitPosition();
-			
-
-			
-			
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-		}
-		
-		
-
-		if (isCancelled()) {
-
-			return 0.0;
-		}
-
-		//publishProgress(value);
-	
-		return 0.0;
-
 	}
 
 	@Override
