@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 import li.rudin.ethernetcontrol.base.EthernetControlException;
 import android.os.AsyncTask;
 
-public class ReadInputValuesAsyncTask extends AsyncTask<Void, Double, Double> {
+public class PressureSensorAsyncTask extends AsyncTask<Void, Double, Double> {
 
 	DrinkMixerActivity activity;
 	DrinkMixer drinkMixer;
@@ -14,9 +14,8 @@ public class ReadInputValuesAsyncTask extends AsyncTask<Void, Double, Double> {
 
 	double volts;
 
-	boolean leftSensorState = true;
 
-	public ReadInputValuesAsyncTask(DrinkMixerActivity activity) {
+	public PressureSensorAsyncTask(DrinkMixerActivity activity) {
 
 		this.drinkMixer = activity.drinkMixer;
 		this.activity = activity;
@@ -50,10 +49,59 @@ public class ReadInputValuesAsyncTask extends AsyncTask<Void, Double, Double> {
 						.println("ReadInputValues: No Connection (NumberFormatException)");
 			}
 
-			publishProgress(volts);
+			
+			
+
+			
+
+				double value = volts;
+
+				
+				
+				value = value - DrinkMixer.PRESSURE_SENSOR_OFFSET;
+
+				value = value / 10;
+
+				if (value < 0) {
+					value = 0.0;
+				}
+				
+				if(drinkMixer.isPressureControlEnabled()){
+					
+					if(value >= drinkMixer.getPressureSetPoint())	{
+						
+						
+							drinkMixer.closeValve(DrinkMixer.COMPRESSOR_PIN);
+					
+					}
+					
+					if(value <= drinkMixer.getPressureSetPoint() - DrinkMixer.PRESSURE_SENSOR_HYSTERESIS ){
+						
+					
+							drinkMixer.openValve(DrinkMixer.COMPRESSOR_PIN);
+					
+					}
+					
+					
+				}else{
+				
+					
+					drinkMixer.closeValve(DrinkMixer.COMPRESSOR_PIN);
+				
+				
+				}
+				
+				DecimalFormat df = new DecimalFormat("#.####");
+				
+				String valueString = df.format(value);
+				
+				System.out.println("Pressure: " + valueString);
+			
+			
+			publishProgress(value);
 
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(DrinkMixer.PRESSURE_SENSOR_SAMPLING_PRERIOD);
 				
 				//TODO: make sleep time adjustable in settings
 
@@ -80,54 +128,13 @@ public class ReadInputValuesAsyncTask extends AsyncTask<Void, Double, Double> {
 
 	@Override
 	protected void onProgressUpdate(Double... values) {
-		
-		//TODO: move to drinkmixer class
-		final int COMPRESSOR_PIN = 12;
-		double hysteresis = 0.03;
-		double offset = 0.17;
 
 		if (activity.settingsFragment != null
 				&& activity.settingsFragment.isVisible()) {
 
-			double value = values[0];
-
+			DecimalFormat df = new DecimalFormat("#.####");
 			
-			
-			value = value - offset;
-
-			value = value / 10;
-
-			if (value < 0) {
-				value = 0.0;
-			}
-			
-			if(activity.drinkMixer.isPressureControlEnabled()){
-				
-				if(value >= activity.drinkMixer.getPressureSetPoint())	{
-					
-					//to avoid network traffic and microcontroller processor work
-					if(activity.drinkMixer.getValveState(COMPRESSOR_PIN) == true){
-						activity.drinkMixer.closeValve(COMPRESSOR_PIN);
-					}
-				}
-				
-				if(value <= activity.drinkMixer.getPressureSetPoint() - hysteresis ){
-					
-					if(activity.drinkMixer.getValveState(COMPRESSOR_PIN) == false){
-						activity.drinkMixer.openValve(COMPRESSOR_PIN);
-					}
-				}
-				
-				
-			}else{
-				if(activity.drinkMixer.getValveState(COMPRESSOR_PIN) == true){
-					activity.drinkMixer.closeValve(COMPRESSOR_PIN);
-				}
-			}
-
-			DecimalFormat df = new DecimalFormat("#.##");
-
-			activity.settingsFragment.setPressureValue(df.format(value));
+			activity.settingsFragment.setPressureValue(df.format(values[0]));
 		}
 
 		super.onProgressUpdate(values);

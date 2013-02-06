@@ -27,36 +27,46 @@ public class SendValveCommandToNetIOAsyncTask extends
 
 					drinkMixer.getDigitalIO().setOutput(4, params[0], true);
 					System.out.println("Pin " + params[0] + " opened");
+					
+					//setstate uncommented because the state array has only 11 entries, TODO: make array bigger 
+					//and uncomment the 4 setValveStates
+					//drinkMixer.setValveState(params[0], true);
 				} else {
 
 					drinkMixer.getDigitalIO().setOutput(4, params[0], false);
 
 					System.out.println("Pin " + params[0] + " closed");
+					//drinkMixer.setValveState(params[0], false);
 				}
 
 			}
 
+			//access the second shift register
 			if (params[0] >= 8) {
 
-				params[0] = params[0] - 8;
+				int pinToSet = params[0] - 8;
 
 				if (params[1] == 1) {
 
-					System.out.println("Try to open pin " + params[0]);
+					
 
-					drinkMixer.getDigitalIO().setOutput(5, params[0], true);
+					drinkMixer.getDigitalIO().setOutput(5, pinToSet, true);
 
 					System.out.println("Pin " + params[0] + " opened");
+					
+					//drinkMixer.setValveState(params[0], true);
 
 				}
 
 				else {
 
-					System.out.println("Try to close pin " + params[0]);
+		
 
-					drinkMixer.getDigitalIO().setOutput(5, params[0], false);
+					drinkMixer.getDigitalIO().setOutput(5, pinToSet, false);
 
-					System.out.println("Pin " + params[0] + " opened");
+					System.out.println("Pin " + params[0] + " closed");
+					
+					//drinkMixer.setValveState(params[0], false);
 
 				}
 			}

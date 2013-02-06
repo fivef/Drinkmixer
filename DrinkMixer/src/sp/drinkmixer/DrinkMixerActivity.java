@@ -29,6 +29,9 @@ import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.config.EmbeddedConfiguration;
+import com.db4o.ext.DatabaseClosedException;
+import com.db4o.ext.DatabaseReadOnlyException;
+import com.db4o.ext.Db4oIOException;
 
 public class DrinkMixerActivity extends Activity {
 
@@ -47,10 +50,6 @@ public class DrinkMixerActivity extends Activity {
 	UsersFragment usersFragment;
 
 	LeaderBoardFragment leaderBoardFragment;
-
-	public LeaderBoardFragment getLeaderBoardFragment() {
-		return leaderBoardFragment;
-	}
 
 	MixingDrinkFragment mixingDrinkFragment;
 
@@ -71,9 +70,6 @@ public class DrinkMixerActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// setContentView(R.layout.main);
-		
-		
 
 		Crittercism.init(getApplicationContext(), "503f8db62cd95220ce000006");
 		
@@ -86,28 +82,6 @@ public class DrinkMixerActivity extends Activity {
 		openLeaderboardFragment();
 		
 		drinkMixer.connectToNetIO();
-
-		/*
-		 * This catches all unhandled Exceptions and logs the error with a user
-		 * description to file
-		 */
-		/*Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
-
-			@Override
-			public void uncaughtException(Thread thread, Throwable ex) {
-				
-				showCatchAllErrorDialog(ex.toString());
-
-			}
-		});
-		
-
-		ArrayList<Drink> test = new ArrayList<Drink>();
-
-		test.get(0);
-		*/
-		
-		//showCatchAllErrorDialog("test");
 
 	}
 
@@ -141,19 +115,26 @@ public class DrinkMixerActivity extends Activity {
 	public void onDestroy() {
 		super.onDestroy();
 
+		shutdownApplication();
+
+	}
 	
+	public void shutdownApplication(){
+		
+		
+		drinkMixer.disconnectFromNetIO();
 
 		textToSpeech.shutdown();
 		
 		saveStateToDB();
-		drinkMixer.disconnectFromNetIO();
+		
 		
 		if (db != null) {
 			db.close();
 
 			System.out.println("DB closed");
 		}
-
+		
 	}
 
 	public void showErrorDialog(String error) {
@@ -587,12 +568,23 @@ public class DrinkMixerActivity extends Activity {
 	public void saveStateToDB() {
 
 		if (db != null) {
-
+			
 			DataModel dataModel = drinkMixer.getDataModel();
 
-			db.store(dataModel);
+			try {
+				db.store(dataModel);
 
-			db.commit();
+				db.commit();
+			} catch (DatabaseClosedException e) {
+				System.out.println("Database was already closed");
+				
+			} catch (DatabaseReadOnlyException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Db4oIOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 	}
@@ -700,6 +692,10 @@ public class DrinkMixerActivity extends Activity {
 			}
 		}
 		return ret;
+	}
+
+	public LeaderBoardFragment getLeaderBoardFragment() {
+		return leaderBoardFragment;
 	}
 
 }

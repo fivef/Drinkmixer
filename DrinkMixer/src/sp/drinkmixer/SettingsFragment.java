@@ -4,9 +4,12 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Switch;
@@ -20,6 +23,11 @@ public class SettingsFragment extends Fragment {
 	SeekBar positionSeekBar;
 	
 	Switch compressorOnOffSwitch;
+	
+	Button fillShotsButton;
+	
+	EditText ecmdCommand;
+	Button ecmdSend;
 
 	public SettingsFragment() {
 
@@ -37,6 +45,11 @@ public class SettingsFragment extends Fragment {
 		pressureValueTextView = (TextView) view.findViewById(R.id.settingsFragmentTextViewPressure);
 
 		positionSeekBar = (SeekBar) view.findViewById(R.id.settingsFragmentSeekBarPWM);
+		
+		positionSeekBar.setMax(DrinkMixer.WORKING_SPACE_WIDTH_IN_ENCODER_PULSES);
+		
+		//set handle to middle position
+		positionSeekBar.setProgress(DrinkMixer.WORKING_SPACE_WIDTH_IN_ENCODER_PULSES/2);
 		
 		positionSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			
@@ -56,7 +69,7 @@ public class SettingsFragment extends Fragment {
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 
-				activity.drinkMixer.sendECMDCommand("hbridge setpoint " + progress);
+				activity.drinkMixer.sendECMDCommand("hbridge setpoint " + (progress - DrinkMixer.WORKING_SPACE_WIDTH_IN_ENCODER_PULSES/2));
 				
 			}
 		});
@@ -72,6 +85,32 @@ public class SettingsFragment extends Fragment {
 					
 					activity.drinkMixer.setPressureControlEnabled(isChecked);
 
+			}
+		});
+		
+		
+		fillShotsButton = (Button) view.findViewById(R.id.settingsFragmentFillShotsButton);
+		
+		fillShotsButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				activity.drinkMixer.startFillShotsThread();				
+			}
+		});
+		
+		
+		ecmdCommand = (EditText) view.findViewById(R.id.settingsFragmentECMDEditText);
+		
+		ecmdSend = (Button) view.findViewById(R.id.settingsFragmentECMDSendButton);
+		ecmdSend.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				activity.drinkMixer.sendECMDCommand(ecmdCommand.getText().toString());
+				
 			}
 		});
 

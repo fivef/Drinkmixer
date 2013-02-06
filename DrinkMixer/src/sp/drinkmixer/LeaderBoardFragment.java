@@ -178,6 +178,7 @@ public class LeaderBoardFragment extends Fragment {
 			
 		case R.id.menu_drink_fragment_CloseApp:
 			
+			activity.shutdownApplication();
 			activity.finish();
 			
 			break;

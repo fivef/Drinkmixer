@@ -43,7 +43,7 @@ public class ConnectToNetIO extends AsyncTask<String, Void, Boolean> {
 
 			String ssid = wifimanager.getConnectionInfo().getSSID();
 
-			if (ssid == null || ssid.compareTo(drinkMixer.wlanSSID) != 0) {
+			if (ssid == null || ssid.compareTo(DrinkMixer.WLAN_SSID) != 0) {
 
 				drinkMixer.oldNetworkId = wifimanager.getConnectionInfo()
 						.getNetworkId();
@@ -56,7 +56,7 @@ public class ConnectToNetIO extends AsyncTask<String, Void, Boolean> {
 					System.out.println(result.SSID);
 
 					if (result.SSID
-							.compareTo("\"" + drinkMixer.wlanSSID + "\"") == 0) {
+							.compareTo("\"" + DrinkMixer.WLAN_SSID + "\"") == 0) {
 
 						wifimanager.enableNetwork(result.networkId, true);
 
@@ -166,7 +166,7 @@ public class ConnectToNetIO extends AsyncTask<String, Void, Boolean> {
 			drinkMixer.setConnectedToNETIO(true);
 
 			// start input value thread
-			drinkMixer.startReadInputValuesThread();
+			drinkMixer.startPressureSensorAsyncTask();
 		} else {
 			drinkMixer.setConnectedToNETIO(false);
 

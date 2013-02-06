@@ -17,6 +17,12 @@ public class DrinkMixer {
 	 * AVR Net IO
 	 */
 	private EthersexTCPDevice dev;
+	
+	//the ssid of the drinkmixers wlan router
+	public static final String WLAN_SSID = "WLAN";
+	
+	//the avr net io's ip address
+	public static final String AVR_NET_IO_IP_ADDRESS = "192.168.178.90";
 
 	int oldNetworkId;
 
@@ -35,36 +41,47 @@ public class DrinkMixer {
 
 	private ArrayList<MixDrinkAsyncTask> runningIngredientTasks = new ArrayList<MixDrinkAsyncTask>();
 
-	AsyncTask<Void, Double, Double> inputSensorThread;
+	AsyncTask<Void, Double, Double> pressureSensor;
 
 	public Ingredient lastAddedIngredient;
 
+	//indicates if cleaning mode is enabled
 	private boolean isCleaning;
 	
-	
-	//pressure sensing:
-	
+	/*
+	 * pressure sensing:
+	 */
+		
 	//indicates if pressure control is enabled
 	private boolean pressureControlEnabled;
 	
-	//indicates the desired pressure in the system
+	//indicates the desired pressure in the system in bar
 	private double pressureSetPoint = 0.2;
-
-	public String wlanSSID = "WLAN";
 	
+	//sample period in ms
+	public static final int PRESSURE_SENSOR_SAMPLING_PRERIOD = 1000;
 	
+	//which shift regeister pin is the compressor connected to
+	public static final int COMPRESSOR_PIN = 12;
 	
-
-	//acutator and sensor names
+	//switching hysteresis
+	public static final double PRESSURE_SENSOR_HYSTERESIS = 0.01;
 	
-	public static final int horizontalMotorOnOffPin = 15;
+	//voltage offset to get a 0 from sensor on ambient pressure
+	public static final double PRESSURE_SENSOR_OFFSET = 0.17;
+	
 	
 	/*
-	 * false = left, true = right
+	 * motor control
 	 */
-	public static final int horizontalMotorDirectionPin = 14;
-	public static final int horizontalMotorLeftContactSensor = 0;
+	
+	//encoder pulses per cm. Needed for centimeters to encoder pulses conversion.
+	public static final int MOTOR_CONTROL_ENCODER_PULSES_PER_CM = 120;
+	
+	//used for positioning by seek bar
+	public static final int WORKING_SPACE_WIDTH_IN_ENCODER_PULSES = 3900;
 
+	
 	/*
 	 * The drink which was last selected in drinksFragment.
 	 */
@@ -73,9 +90,11 @@ public class DrinkMixer {
 	
 	
 	/*
-	 * the currently acitve user
+	 * the currently active user
 	 */
 	private User currentUser;
+
+	private AsyncTask<Void, Double, Double> fillShotsThread;
 
 	public User getCurrentUser() {
 		return currentUser;
@@ -234,13 +253,13 @@ public class DrinkMixer {
 		}
 
 		// default port of ethernetcontrol library and ethersex is 2701
-		connectTask = new ConnectToNetIO(activity).execute("192.168.178.90");
+		connectTask = new ConnectToNetIO(activity).execute(DrinkMixer.AVR_NET_IO_IP_ADDRESS);
 
 	}
 
 	public void disconnectFromNetIO() {
 
-		stopReadInputValuesThread();
+		stopPressureSensorAsyncTask();
 
 		WifiManager wifimanager = (WifiManager) activity
 				.getSystemService(Context.WIFI_SERVICE);
@@ -280,7 +299,15 @@ public class DrinkMixer {
 	}
 
 	public boolean getValveState(int number) {
-		return data.valveStates.get(number);
+		
+		boolean state;
+		
+		try{
+			state = data.valveStates.get(number);
+		}catch(IndexOutOfBoundsException e){
+			state = false;
+		}
+		return state;
 	}
 
 	public void setValveState(int number, boolean state) {
@@ -448,21 +475,44 @@ public class DrinkMixer {
 
 	}
 
-	public void startReadInputValuesThread() {
+	public void startPressureSensorAsyncTask() {
 
-		inputSensorThread = new ReadInputValuesAsyncTask(activity)
+		pressureSensor = new PressureSensorAsyncTask(activity)
 		.executeOnExecutor(
 				AsyncTask.THREAD_POOL_EXECUTOR);
 
 	}
 
-	public void stopReadInputValuesThread() {
+	public void stopPressureSensorAsyncTask() {
 
-		if (inputSensorThread != null) {
-			inputSensorThread.cancel(true);
+		if (pressureSensor != null) {
+			pressureSensor.cancel(true);
 		}
 	}
 
+	public void startFillShotsThread() {
+		
+		//Cancel thread if alread running
+		if (fillShotsThread != null) {
+			fillShotsThread.cancel(true);
+		}
+
+		fillShotsThread = new MotorControlAsyncTask(activity)
+		.executeOnExecutor(
+				AsyncTask.THREAD_POOL_EXECUTOR);
+
+	}
+	
+	/* no needed?
+	public void stopFillShotsThread() {
+		if (fillShotsThread != null) {
+			fillShotsThread.cancel(true);
+		}
+		
+	}
+	*/
+	
+	
 	public void duplicateDrink(Drink selectedDrink) {
 
 		try {
@@ -523,13 +573,6 @@ public class DrinkMixer {
 		this.analogIO = analogIO;
 	}
 
-	public AsyncTask<Void, Double, Double> getPressureSensorThread() {
-		return inputSensorThread;
-	}
 
-	public void setPressureSensorThread(
-			AsyncTask<Void, Double, Double> pressureSensorThread) {
-		this.inputSensorThread = pressureSensorThread;
-	}
 
 }
