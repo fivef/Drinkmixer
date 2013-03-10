@@ -62,7 +62,8 @@ public class DrinkMixer {
 	public static final int COMPRESSOR_PIN = 12;
 
 	// switching hysteresis
-	public static final double PRESSURE_SENSOR_HYSTERESIS = 0.01;
+	public static final double PRESSURE_SENSOR_HYSTERESIS = 0.002;
+	//public static final double PRESSURE_SENSOR_HYSTERESIS = 0.01;
 
 	// voltage offset to get a 0 from sensor on ambient pressure
 	public static final double PRESSURE_SENSOR_OFFSET = 0.17;

@@ -95,7 +95,7 @@ public class PressureControlAsyncTask extends AsyncTask<Void, Double, Double> {
 				
 				String valueString = df.format(value);
 				
-				System.out.println("Pressure: " + valueString);
+				System.out.println(valueString);
 			
 			
 			publishProgress(value);
