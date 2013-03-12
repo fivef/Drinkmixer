@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2013 Steffen Pfiffner
+ * 
+ * Licence: GPL v3
+ */
+
 package sp.drinkmixer;
 
 import android.view.LayoutInflater;
@@ -49,23 +55,6 @@ public class UsersSpinnerListAdapter extends BaseAdapter implements
 
 			holder.value = (TextView) convertView
 					.findViewById(R.id.spinner_item_text);
-
-			// On item click listener
-			/*
-			 * convertView.setOnClickListener(new OnClickListener() {
-			 * 
-			 * @Override public void onClick(View v) {
-			 * 
-			 * //TODO Menu instead of check ViewHolder holder = (ViewHolder)
-			 * v.getTag();
-			 * 
-			 * // System.out.print(holder.listEntry.)
-			 * 
-			 * context.entries.get(holder.id).toggleSelected(); //
-			 * entries.get(entries.indexOf(holder.listEntry)).toggleSelected();
-			 * //holder.listEntry.toggleSelected();
-			 * holder.checkbox.setChecked(!holder.checkbox.isChecked()); } });
-			 */
 
 			convertView.setTag(holder);
 		} else {

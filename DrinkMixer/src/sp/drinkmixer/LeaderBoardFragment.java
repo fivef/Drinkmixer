@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2013 Steffen Pfiffner
+ * 
+ * Licence: GPL v3
+ */
+
 package sp.drinkmixer;
 
 import java.util.Collections;

@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2013 Steffen Pfiffner
+ * 
+ * Licence: GPL v3
+ */
+
 package sp.drinkmixer;
 
 import android.app.Fragment;
@@ -82,8 +88,13 @@ public class SettingsFragment extends Fragment {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		
-					
-					activity.drinkMixer.setPressureControlEnabled(isChecked);
+					if(isChecked){
+						activity.drinkMixer.setPressureControlEnabled(isChecked);
+					}else{
+						
+						activity.drinkMixer.closeValve(DrinkMixer.COMPRESSOR_PIN);
+						activity.drinkMixer.setPressureControlEnabled(isChecked);
+					}
 
 			}
 		});

@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2013 Steffen Pfiffner
+ * 
+ * Licence: GPL v3
+ */
+
 package sp.drinkmixer;
 
 import li.rudin.ethernetcontrol.base.EthernetControlException;
@@ -73,7 +79,7 @@ public class SendValveCommandToNetIOAsyncTask extends
 
 		} catch (EthernetControlException e) {
 
-			System.out.println("Send Command: No Connection");
+
 			return false;
 
 		}
@@ -89,6 +95,13 @@ public class SendValveCommandToNetIOAsyncTask extends
 			drinkMixer.setConnectedToNETIO(true);
 		} else {
 			drinkMixer.setConnectedToNETIO(false);
+			
+			System.out.println("Send Command: No Connection");
+			
+			//activity.showErrorDialog("Send Command: No Connection");
+			
+			
+			//drinkMixer.connectToNetIO();
 		}
 
 		activity.invalidateOptionsMenu();

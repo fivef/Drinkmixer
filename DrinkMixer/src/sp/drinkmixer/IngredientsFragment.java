@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2013 Steffen Pfiffner
+ * 
+ * Licence: GPL v3
+ */
+
 package sp.drinkmixer;
 
 import java.text.DecimalFormat;
@@ -173,11 +179,14 @@ public class IngredientsFragment extends Fragment {
 				// selectedIngredient.setFlowRate(flowrateFloat);
 
 				try {
-					selectedIngredient.setFlowRate(Float
-							.parseFloat(flowrateEditText.getText().toString()));
+					selectedIngredient.setFlowRate(Double
+							.parseDouble(flowrateEditText.getText().toString()));
 				} catch (NumberFormatException e) {
 
-					selectedIngredient.setFlowRate(4.6);
+					//TODO: check parse problem which sometimes occurs
+					//fallback to a default value
+					//selectedIngredient.setFlowRate(4.6);
+					activity.showErrorDialog("Unable to parse entered number.");
 				}
 
 			}
@@ -277,7 +286,7 @@ public class IngredientsFragment extends Fragment {
 					selectedIngredient.setTotalAmount(Integer.parseInt(s
 							.toString()));
 					
-					currentAmountEditText.setText(s.toString());
+					//currentAmountEditText.setText(s.toString());
 
 				} catch (NumberFormatException e) {
 
@@ -476,9 +485,12 @@ public class IngredientsFragment extends Fragment {
 
 		selectedIngredient.setFlowRate(flowRate);
 
-		DecimalFormat df = new DecimalFormat("#.##");
+		//DecimalFormat df = new DecimalFormat("#.##");
+		
 
-		flowrateEditText.setText(df.format(flowRate) + "");
+		//flowrateEditText.setText(df.format(flowRate) + "");
+		
+		setAllEditTexts();
 
 		return;
 	}

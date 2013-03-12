@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2013 Steffen Pfiffner
+ * 
+ * Licence: GPL v3
+ */
+
 package sp.drinkmixer;
 
 import java.text.DecimalFormat;
@@ -66,6 +72,7 @@ public class PressureControlAsyncTask extends AsyncTask<Void, Double, Double> {
 					value = 0.0;
 				}
 				
+				//only start/stop compressor if pressure control is enabled
 				if(drinkMixer.isPressureControlEnabled()){
 					
 					if(value >= drinkMixer.getPressureSetPoint())	{
@@ -83,12 +90,6 @@ public class PressureControlAsyncTask extends AsyncTask<Void, Double, Double> {
 					}
 					
 					
-				}else{
-				
-					
-					drinkMixer.closeValve(DrinkMixer.COMPRESSOR_PIN);
-				
-				
 				}
 				
 				DecimalFormat df = new DecimalFormat("#.####");

@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2013 Steffen Pfiffner
+ * 
+ * Licence: GPL v3
+ */
+
 package sp.drinkmixer;
 
 
@@ -146,9 +152,7 @@ public class DrinkMixerActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				
-				//TODO: check if this can be deleted
-				openDrinksFragment();
+	
 			}
 		});
 

@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2013 Steffen Pfiffner
+ * 
+ * Licence: GPL v3
+ */
+
 package sp.drinkmixer;
 
 import java.util.List;
@@ -164,6 +170,9 @@ public class ConnectToNetIO extends AsyncTask<String, Void, Boolean> {
 
 		if (result) {
 			drinkMixer.setConnectedToNETIO(true);
+			
+			//make sure all valves are closed
+			//drinkMixer.closeAllValves();
 
 			// start input value thread
 			drinkMixer.startPressureSensorAsyncTask();

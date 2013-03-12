@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2013 Steffen Pfiffner
+ * 
+ * Licence: GPL v3
+ */
+
 package sp.drinkmixer;
 
 import java.util.ArrayList;
@@ -62,8 +68,8 @@ public class DrinkMixer {
 	public static final int COMPRESSOR_PIN = 12;
 
 	// switching hysteresis
-	public static final double PRESSURE_SENSOR_HYSTERESIS = 0.002;
-	//public static final double PRESSURE_SENSOR_HYSTERESIS = 0.01;
+	//public static final double PRESSURE_SENSOR_HYSTERESIS = 0.002;
+	public static final double PRESSURE_SENSOR_HYSTERESIS = 0.01;
 
 	// voltage offset to get a 0 from sensor on ambient pressure
 	public static final double PRESSURE_SENSOR_OFFSET = 0.17;
@@ -229,6 +235,14 @@ public class DrinkMixer {
 		}
 
 	}
+	
+	public void closeAllValves() {
+		for(int i = 0; i<16;i++){
+			
+			closeValve(i);
+		}
+		
+	}
 
 	public void closeValve(int portNumber) {
 
@@ -262,7 +276,9 @@ public class DrinkMixer {
 		WifiManager wifimanager = (WifiManager) activity
 				.getSystemService(Context.WIFI_SERVICE);
 
-		wifimanager.enableNetwork(oldNetworkId, true);
+		if(!activity.DEBUG_MODE){
+			wifimanager.enableNetwork(oldNetworkId, true);
+		}
 
 		System.out.println("Connected to "
 				+ wifimanager.getConnectionInfo().getSSID());
@@ -563,5 +579,7 @@ public class DrinkMixer {
 	public void setAnalogIO(EthersexAnalogIO analogIO) {
 		this.analogIO = analogIO;
 	}
+
+
 
 }

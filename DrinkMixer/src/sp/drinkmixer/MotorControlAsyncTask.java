@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2013 Steffen Pfiffner
+ * 
+ * Licence: GPL v3
+ */
+
 package sp.drinkmixer;
 
 import java.text.DecimalFormat;
@@ -18,6 +24,9 @@ public class MotorControlAsyncTask extends AsyncTask<Void, Double, Double> {
 	
 	//Distance between the center of the first shot glass and init position in mm
 	public final static int DISTANCE_BETWEEN_FIRST_GLASS_AND_INIT_POSITION = 27;
+	
+	//Time to fill a shot in ms TODO: use the calculated time the valve is open instead
+	public final static int TIME_TO_FILL_SHOT = 4000;
 
 	public MotorControlAsyncTask(DrinkMixerActivity activity) {
 
@@ -35,7 +44,7 @@ public class MotorControlAsyncTask extends AsyncTask<Void, Double, Double> {
 			
 			moveRight(DISTANCE_BETWEEN_FIRST_GLASS_AND_INIT_POSITION);
 			
-			//Fill first
+			//TODO: use a callback when movement is finished instead
 			Thread.sleep(5000);
 			
 			
@@ -45,7 +54,7 @@ public class MotorControlAsyncTask extends AsyncTask<Void, Double, Double> {
 				drink.mix(activity);
 			}
 			
-			Thread.sleep(7000);
+			Thread.sleep(TIME_TO_FILL_SHOT);
 			
 			moveLeft(DISTANCE_BETWEEN_SHOT_GLASSES);
 			
@@ -56,7 +65,7 @@ public class MotorControlAsyncTask extends AsyncTask<Void, Double, Double> {
 				drink.mix(activity);
 			}
 			
-			Thread.sleep(7000);
+			Thread.sleep(TIME_TO_FILL_SHOT);
 			
 			moveToInitPosition();
 			
